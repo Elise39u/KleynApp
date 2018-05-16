@@ -1,0 +1,37 @@
+public string GetDeleteImageAsync(string typeCode, string itemnumber, string method)
+        {
+
+            var ResultNumber = itemnumber;
+            string WEBSERVICE_URL = "https://web.kleyn.com:1919/locatiesdev/picture/" + ResultNumber + "/" + typeCode;
+            try
+            {
+                var ImageRequest = WebRequest.Create(WEBSERVICE_URL);
+                if (ImageRequest != null)
+                {
+                    ImageRequest.Method = method;
+                    ImageRequest.Timeout = 12000;
+                    ImageRequest.Headers.Add("Kleyn-Apikey", "{CA78D608-E9C7-4880-AB6A-B2DF6E0EE093}");
+                    using (System.IO.Stream s = ImageRequest.GetResponse().GetResponseStream())
+                    {
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(s))
+                        {
+                            var jsonResponse = sr.ReadToEnd();
+                            if (method == "get" || method == "GET")
+                            {
+                                //ConvertToImage(Convert.ToByte(jsonResponse));
+                                return jsonResponse;
+                            }
+                            else
+                            {
+                                return "Image Deleted";
+                            }
+                        }
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                return ex.Status.ToString();
+            };
+            return "Something went wrong with method: " + method;
+        }

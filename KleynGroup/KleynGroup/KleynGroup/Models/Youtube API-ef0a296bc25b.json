@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "shining-sphinx-201307",
+  "private_key_id": "ef0a296bc25bff035a6207eea0c41066bbd8324a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQCr3OhTm5gun5uK\naUkvzBAqgCWfHHVH5HXu7V7Kqkq+RTvdYccbTsU8f44RdUusyQNWoY0r4IrstcFr\nBJNUYN2OAn1hurCwu2Hm2a182BgbDXu+euyWPlb36xjpbYevV3xMRwg+ZG3m4oLt\nitVzG4B/Q1ZwlwWfLdkimVDhjMr4J4BiMEtavqmQ6ENoaQc8Vu6l1tfv8J8pBHkW\ncauLCx2OGR5ZS2FpJ4S5JVm3YId8/8NF/uSIXL8h3Ayw5+Ps9UgI33eblgFfpATi\nmLRAirncjPx+OIz5Hmv29YPUub8ZSDdCP2zPbslkPyCWGCMAPQIej3NWIR5V20P0\nJ21IG9FxAgMBAAECgf8dZQags+nTfVR4jtKaR/FXU5Ot/ot+ZPBZJBu2+9cV/S8t\nwHk7RL3AiOv6fieqLwB1dVDCQrfJVwPQN8FEUd9J6rViplTbUzFZOE+q091LnqdU\nth9TSg0oNY2xzNMxYSCqfXu0neZ3YCIEo4Nw0TEW3FtH5oy0LREIowvW9b3Bam9E\nMcR0UFSGggeIMIuWplHWq8Qua86cM+ZIn6lyOHoSxQtxMydd8Hb/Grx7PZTNG8Et\n4+9PE9bnk9N4GFPvQAzxNkhT2/NEmqr54KoF+WE9TghNkkhCNKUW8Dh+XhODqr9G\nyA1nTtCl6QK+vGQofIdDs0+SNTrliIcMID6lh7cCgYEA10uc+1J5LU0WbWXYwF6i\nkj+SOkaDBpuYlftiVSvU8CMYo5l5/fGbH/9AyDkRfygOnZVwdREoYiU7C6jvSTQa\nYyXKKVv89FP8IUY0g2RmozL6275cTDtTqyISxh2s8zn6ozd+1cRoJqnog/fTYseg\nuZGFm4/d7vwsU1lPQedlTI8CgYEAzFslSBAmK8T5m09gol5xqU9ajdIYDU138Pdt\nM7gEGH0wO7Pyp5DlfpN8DkbmreHSwJ1VY9wyPjAQaZTAk937+Q98ZWdHPmqN9EOX\nJ9V8Wrz0WVUtm4Xm4VmehpHIu9vLAV7xneVsF4A5s+6uB2sFr30Vg3+TRvYA0aWj\n7hCYAf8CgYA4iwdDijmBCEnnmWP/wdr4hfGllHc8+Qht+4Or0sMt/kmuTdSYOSgA\nk000SKiruJ1+DY1ncYYloJmNSmTt2N1FRNt/WUVp9dS1+HY6O9go7G6t36Tl8H7c\n5yn/FjQh/QwyaZTKF7cy0FTcs+20d7FiizGH1ZT3+wq5KS+Do34bSQKBgQCMZV4y\nqS2gSn52Dk3En4AVIviCkMGHeh6aBVMYAieGL5PQoKtoJesVT/wdzuYytf/V5wHA\nToqSIPFVqCW6MPsovFPpUtAmeIw4MauKaWg66rAxI4zm2VKqpah8qXGwZquMsI7s\nvK7LYoPCM4uKeyN30kbShfZH/UDIx7TdHLdiPwKBgCdboItQg2OkmfzTu/xBNGyE\nZmFesiMQbYPPl3Mu+Yyd1RtwzyclsnC9eroBFz48cNdLG+VtmnM8GpWq1dbjIty3\nZBqIH9YAsoc3iUyYkEFaFY7Eok3aY7SjnuovAdfPW35Vt49VluK45vkFELDWc2eA\nv8ooS90byeeag0DVHZTm\n-----END PRIVATE KEY-----\n",
+  "client_email": "adminkey@shining-sphinx-201307.iam.gserviceaccount.com",
+  "client_id": "101271721240267600500",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/adminkey%40shining-sphinx-201307.iam.gserviceaccount.com"
+}

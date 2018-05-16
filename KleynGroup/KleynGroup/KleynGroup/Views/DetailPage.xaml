@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KleynGroup.Views.DetailPage"
+             x:Name="DetailPage">
+    <StackLayout x:Name="MasterLayout">
+        <StackLayout x:Name="Header" Orientation="Horizontal" VerticalOptions="Start">
+            <Image x:Name="Logo" Source="LoginLogo.png" Margin=" 5,5,0,10"/>
+            <Image x:Name="Image_Edit" Source="test.png" Margin=" 0,10,20,5"/>
+        </StackLayout>
+        <ScrollView>
+            <StackLayout x:Name="MasterContent" VerticalOptions="Start">
+                <Label x:Name="LabelFile"/>
+                <Image x:Name="image"/>
+                <!-- Merk naam-->
+                <Label Text="Vehicle name" x:Name="Vehicle_name" HorizontalOptions="Start" Margin="5,0,0,0"/>
+                <Label Text="" x:Name="Vehicle_name_binding" HorizontalOptions="End" Margin="0,-30,5,0" />
+
+
+                <StackLayout x:Name="SlaveContent">
+                    <Image x:Name="Vehicle_Image" Source="" Margin="10, 0, 10, 15"/>
+                    <Button x:Name="ViewMoreImgButton" Text="View more images" Margin="10, 15, 10, 15"/>
+                    <Button Text="Add Image" x:Name="btnCamera" BackgroundColor="#EF7622" TextColor="White"/>
+                    <StackLayout x:Name="SlaveContentDetails" Margin="0,-10,0,0">
+                        <StackLayout x:Name="Details" Margin="10,5,10,10">
+                            <Label Text="Details" x:Name="h1_Detail"/>
+                            <!-- Status info -->
+                            <Label Text="Status:" x:Name="Status_Text" HorizontalOptions="Start" />
+                            <Label Text="" x:Name="Status_Binding" HorizontalOptions="End" Margin="0,-30,0,0" />
+
+                            <!-- Department info -->
+                            <Label Text="Department:" x:Name="Department_Text" HorizontalOptions="Start" />
+                            <Label Text="" x:Name="Department_Binding" HorizontalOptions="End" Margin="0,-30,0,0" />
+
+                            <!-- Test data info -->
+                            <Label Text="Data" x:Name="Data_Text" HorizontalOptions="Start"></Label>
+                            <ListView IsPullToRefreshEnabled="True" x:Name="MyListView" RowHeight="60" SeparatorVisibility="None">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <StackLayout Orientation="Vertical" Padding="8,0,8,0">
+                                                <Label Text="{Binding label}" x:Name="datalist" HorizontalOptions="Start" />
+                                                <Label Text="{Binding waarde}" x:Name="datalist2"  HorizontalOptions="End" Margin="0,-30,0,0" />
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                            <!-- build date info -->
+                            <Label Text="Seller:"  x:Name="Seller_Text" HorizontalOptions="Start"/>
+                            <Label Text="Peter Muilenburg" x:Name="Seller_Binding" HorizontalOptions="End" Margin="0,-30,0,0" />
+
+                            <!-- build date info -->
+                            <Label Text="Price (€):" x:Name="Price_Text" HorizontalOptions="Start" />
+                            <Label Text="5000,-" x:Name="Price_Binding" HorizontalOptions="End" Margin="0,-30,0,0" />
+
+                            <!-- Mileage info -->
+                            <Label Text="Mileage:" x:Name="Mileage_Text" HorizontalOptions="Start"/>
+                            <Label Text="234.555 KM" x:Name="Mileage_Binding" HorizontalOptions="End" Margin="0,-30,0,0" />
+
+                            <!-- build date info -->
+                            <Label Text="Date of Built:" x:Name="BuiltDate_Text" HorizontalOptions="Start" />
+                            <Label Text="2014/04" x:Name="BuiltDate_Binding" HorizontalOptions="End" Margin="0,-30,0,0" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout x:Name="SlaveContentLocation" Margin="0,-10,0,0" >
+                        <StackLayout x:Name="Location" Margin="10,5,10,5">
+                            <Label Text="Location of vehicle" x:Name="h1_Location"/>
+                            <Label Text="" x:Name="Location_Binding"></Label>
+                            <Image x:Name="MapsExample" Source="examplemaps.png" Margin=" 5,5,0,10"/>
+                            <ActivityIndicator x:Name="Spinner"
+                                               IsVisible="{Binding Source={x:Reference DetailPage}, Path=IsBusy}" 
+                                               IsRunning="{Binding Source={x:Reference DetailPage}, Path=IsBusy}"/>
+
+                            <Button x:Name="Location_Open" Text="Open Google Maps" Clicked="Location_Open_ClickedAsync"></Button>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout x:Name="SlaveContentVideo">
+                        <StackLayout x:Name="Video" Margin="10,5,10,5">
+                            <Label Text="Youtube Video" x:Name="h1_Video"/>
+                            <Image x:Name="YTexample" Source="ytexample.png" Margin=" 5,5,0,10"/>
+                            <Button x:Name="Youtube_Open" Text="Check for Youtube Accounts" Clicked="Check_Youtube_ChannelsAsync"></Button>
+                            <Button Text="Take A Video"    
+                    x:Name="takeVideo"    
+                    BackgroundColor="#EF7622"
+                    TextColor="White"
+                    Clicked="BtnVideo_ClickedAsync"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+        <StackLayout x:Name="Footer" Orientation="Horizontal" VerticalOptions="EndAndExpand" Margin="0,0,0,-5">
+            <Label x:Name="Lbl_CR" Text="Copyright © 2018, Kleyn Group" Margin="95, 0, 0, 0"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
