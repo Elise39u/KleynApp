@@ -9,6 +9,8 @@ using KleynGroup.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ZXing.Net.Mobile.Forms;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 
 namespace KleynGroup.Views
 {
@@ -25,9 +27,19 @@ namespace KleynGroup.Views
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             Init();
+
+            Backbutton.Clicked += async (sender, args) =>
+            {
+                var LoginPage = new NavigationPage(new LoginPage());
+                NavigationPage.SetHasNavigationBar(LoginPage, false);
+                await Navigation.PushAsync(LoginPage);
+            };
         }
+
         void Init()
         {
+            Backbutton.HorizontalOptions = LayoutOptions.EndAndExpand;
+
             Header.BackgroundColor = Constants.KleynGroupBG;
             Logo.HeightRequest = 40;
 
@@ -55,7 +67,7 @@ namespace KleynGroup.Views
             if (double.TryParse(keyword, out num))
             {
                 var ResultPlusText = keyword;
-                var DetailPage = new NavigationPage(new DetailPage(ResultPlusText));
+                var DetailPage = new DetailPage(ResultPlusText);
                 NavigationPage.SetHasNavigationBar(DetailPage, false);
                 DetailPage.BindingContext = ResultPlusText;
                 Navigation.PushAsync(DetailPage);
@@ -69,9 +81,27 @@ namespace KleynGroup.Views
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
+            var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+            if (status != PermissionStatus.Unknown)
+            {
+                var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Camera);
+                //Best practice to always check that the key exists
+                if (results.ContainsKey(Permission.Camera))
+                {
+                    status = results[Permission.Camera];
+                }
 
-            // Create our custom overlay
-            var customLayout = new StackLayout { };
+                if (status == PermissionStatus.Granted)
+                {
+                }
+                else if (status != PermissionStatus.Unknown)
+                {
+                    await DisplayAlert("Camera Denied", "Can not continue, try again.", "OK");
+                    return;
+                }
+            }
+                // Create our custom overlay
+                var customLayout = new StackLayout { };
             var header_qr = new StackLayout
             {
                 BackgroundColor = Constants.KleynGroupBG,
@@ -117,7 +147,6 @@ namespace KleynGroup.Views
             /// Make a new scanner page and add the layout
             var scan = new ZXingScannerPage(customOverlay: customLayout);
             NavigationPage.SetHasNavigationBar(scan, false);
-
             //Push the Scan page as first in the Navigation row
             await Navigation.PushAsync(scan);
 
@@ -146,7 +175,7 @@ namespace KleynGroup.Views
                             {
                                 // If so send the user to a new detailpage with the itemnumber
                                 var ResultPlusText = InfoDetail;
-                                var DetailPage = new NavigationPage(new DetailPage(ResultPlusText));
+                                var DetailPage = new DetailPage(ResultPlusText);
                                 NavigationPage.SetHasNavigationBar(DetailPage, false);
                                 DetailPage.BindingContext = ResultPlusText;
                                 await Navigation.PushAsync(DetailPage);

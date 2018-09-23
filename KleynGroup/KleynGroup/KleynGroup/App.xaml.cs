@@ -12,7 +12,7 @@ using Xamarin.Forms;
 namespace KleynGroup
 {
 	public partial class App : Application
-	{
+    {
 	    static TokenDatabaseController tokenDatabase;
 	    static UserDatabaseController userDatabase;
 	    static RestServiceLogin RestServiceLogin;
@@ -23,7 +23,7 @@ namespace KleynGroup
 
             if (!IsUserLoggedIn)
             {
-                MainPage = new NavigationPage(new Dashboard());
+                MainPage = new NavigationPage(new LoginPage());
             }
             else
             {

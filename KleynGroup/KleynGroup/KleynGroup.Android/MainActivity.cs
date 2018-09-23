@@ -12,7 +12,7 @@ using Android.Content;
 using Android;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
-using FFImageLoading.Forms.Droid;
+using Android.Content.Res;
 
 namespace KleynGroup.Droid
 {
@@ -33,12 +33,11 @@ namespace KleynGroup.Droid
 
             base.OnCreate(bundle);
 
-            CachedImageRenderer.Init(enableFastRenderer: true);
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
             Xamarin.FormsMaps.Init(this, bundle);
             global::Xamarin.FormsGoogleMaps.Init(this, bundle);
-            Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity = this;
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
         }
     }
 }

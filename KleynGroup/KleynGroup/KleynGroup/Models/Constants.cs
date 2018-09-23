@@ -8,7 +8,7 @@ namespace KleynGroup.Models
     //HERE ARE ALL STATIC INFORMATION 
     public class Constants
     { 
-        public static string URL_LOGIN = "http://192.168.2.12:45455/token";
+        public static string URL_LOGIN = "https://justin555.000webhostapp.com/api/login";
         public static string URL_REGISTER = "http://http://77.162.207.35";
 
         public static bool IsDev = true;
@@ -23,5 +23,12 @@ namespace KleynGroup.Models
         //Test account
         public static string Username = "kleynadmin";
         public static string Password = "password";
+
+        // Google Urls
+        public static string AppName = "Kleyn Park";
+        public static string Scope = "https://www.googleapis.com/auth/userinfo.email";
+        public static string AuthorizeUrl = "https://accounts.google.com/o/oauth2/auth";
+        public static string AccessTokenUrl = "https://www.googleapis.com/oauth2/v4/token";
+        public static string UserInfoUrl = "https://www.googleapis.com/oauth2/v2/userinfo";
     }
 }

@@ -7,6 +7,7 @@
     <StackLayout x:Name="MasterLayout">
         <StackLayout x:Name="Header" Orientation="Horizontal" VerticalOptions="Start">
             <Image x:Name="Logo" Source="LoginLogo.png" Margin=" 5,5,0,10"/>
+            <Button x:Name="Backbutton" TextColor="White" BorderWidth="0" BorderColor="Transparent" BackgroundColor="Transparent" Text="Log out" Margin=" 0,10,20,5" />
         </StackLayout>
 
         <StackLayout x:Name="interneterror" HorizontalOptions="CenterAndExpand" VerticalOptions="Start">

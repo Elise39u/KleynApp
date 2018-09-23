@@ -9,53 +9,56 @@ namespace KleynGroup.Data
 {
     public class UserDatabaseController
     {
-        private static object locker = new object();
-        private SQLiteConnection database;
+        SQLiteConnection _conn;
 
-        public UserDatabaseController()
+        //Create
+        public void UserDatabase()
         {
-            database = DependencyService.Get<ISQLite>().GetConnection();
-            database.CreateTable<User>();
+            _conn = DependencyService.Get<ISqLite>().GetConnection();
+            _conn.CreateTable<UserData>();
         }
 
-        public User GetUser()
+        public void Droptable()
         {
-            lock (locker)
-            {
-                if (database.Table<User>().Count() == 0)
-                {
-                    return null;
-                }
-                else
-                {
-                    return database.Table<User>().First();
-                }
-            }
+            _conn.Execute("delete from UserData");
         }
 
-        public int SaveUser(User user)
+        public IEnumerable<UserData> GetUsers()
         {
-            lock (locker)
-            {
-                if (user.Id != 0)
-                {
-                    database.Update(user);
-                    return user.Id;
-                }
-
-                else
-                {
-                    return database.Insert(user);
-                }
-            }
+            var users = (from mem in _conn.Table<UserData>() select mem);
+            return users;
         }
 
-        public int DeleteUser(int id)
+
+        //INSERT
+        public string AddUser(Token token)
         {
-            lock (locker)
-            {
-                return database.Delete<User>(id);
-            }
+            UserDatabase();
+            _conn.Insert(token); // <-- Crash line System.NullReferenceException: Object reference not set to an instance of an object.
+            return "success";
+        }
+        /*
+        //INSERT
+        public string AddUser(Token token)
+        {
+            var NumOfRows = _conn.Insert(token); // <-- Crash line System.NullReferenceException: Object reference not set to an instance of an object.
+            if (NumOfRows > 0)
+                return "Succes Users added";
+            else
+                return "Something went wrong contact a admin";
+        }
+        */
+
+        public string DeleteUser(int id)
+        {
+            _conn.Delete<UserData>(id);
+            return "success";
+        }
+
+        public List<UserData> GetAllUsers()
+        {
+            UserDatabase();
+            return _conn.Query<UserData>("SELECT * FROM UserData");
         }
     }
 }

@@ -14,7 +14,7 @@ namespace KleynGroup.Data
 
         public TokenDatabaseController()
         {
-            database = DependencyService.Get<ISQLite>().GetConnection();
+            database = DependencyService.Get<ISqLite>().GetConnection();
             database.CreateTable<Token>();
         }
 

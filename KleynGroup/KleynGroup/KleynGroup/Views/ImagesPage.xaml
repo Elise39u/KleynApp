@@ -6,15 +6,17 @@
     <StackLayout x:Name="MasterLayout">
         <StackLayout x:Name="Header" Orientation="Horizontal" VerticalOptions="Start">
             <Image x:Name="Logo" Source="LoginLogo.png" Margin=" 5,5,0,10"/>
+            <Button x:Name="Return" TextColor="White" BorderWidth="0" BorderColor="Transparent" BackgroundColor="Transparent" Text="Back" Margin=" 0,10,20,5"/>
         </StackLayout>
 
         <ScrollView>
             <StackLayout x:Name="MasterContent" VerticalOptions="Start">
+                <Button x:Name="UploadButton" Text="Upload Image" Clicked="UploadAsyncButton_Clicked"/>
                 <ActivityIndicator x:Name="Spinner"
                                                IsVisible="{Binding Source={x:Reference ImagePage}, Path=IsBusy}" 
                                                IsRunning="{Binding Source={x:Reference ImagePage}, Path=IsBusy}"/>
             </StackLayout>
-            </ScrollView>
+        </ScrollView>
                 
                 <StackLayout x:Name="Footer" Orientation="Horizontal" VerticalOptions="EndAndExpand" Margin="0,0,0,-5">
             <Label x:Name="Lbl_CR" Text="Copyright © 2018, Kleyn Group" Margin="95, 0, 0, 0"/>

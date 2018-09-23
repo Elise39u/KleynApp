@@ -4,11 +4,11 @@
              x:Class="KleynGroup.Views.LoginPage">
 
     <StackLayout x:Name="MasterLayout">
-        <StackLayout x:Name="interneterror" HorizontalOptions="CenterAndExpand" VerticalOptions="Start">
-            <Label x:Name="Lbl_NoInternet" HorizontalOptions="CenterAndExpand" TextColor="White" BackgroundColor="Red"/>
+        <StackLayout x:Name="Interneterror" HorizontalOptions="CenterAndExpand" VerticalOptions="Start">
+            <Label x:Name="LblNoInternet" HorizontalOptions="CenterAndExpand" TextColor="White" BackgroundColor="Red"/>
         </StackLayout>
         <StackLayout x:Name="LogoLayout" VerticalOptions="FillAndExpand">
-            <Image x:Name="LoginLogo" Source="LoginLogo.png" Margin="0,0,0,20"/>
+            <Image x:Name="LoginLogo" Source="LoginLogo.png" Margin="0,25,0,5"/>
         </StackLayout>
 
         <StackLayout x:Name="LoginEntries" VerticalOptions="StartAndExpand">
@@ -21,17 +21,17 @@
             </StackLayout.Padding>
 
             <ActivityIndicator x:Name="ActivitySpinner" IsRunning="True" />
-            <Entry x:Name="Entry_Username" Placeholder="Username" Text="" Margin="0,20,0,10"/>
-            <Entry x:Name="Entry_Password" Placeholder="Password" Text=""/>
-            <Button x:Name="Btn_Signin"  Clicked="LoginRequest" Text="Sign In"  Margin="0,40,0,0"/>
+            <Entry x:Name="EntryUsername" Placeholder="Username" Text="" Margin="0,20,0,10"/>
+            <Entry x:Name="EntryPassword" Placeholder="Password" Text=""/>
+            <Button x:Name="BtnSignin"  Clicked="LoginRequest" Text="Sign In"  Margin="0,40,0,0"/>
             <StackLayout x:Name="Logingin" HorizontalOptions="CenterAndExpand">
-                <Label x:Name="Lbl_Logingin" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="LblLogingin" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="LblEdition" HorizontalOptions="CenterAndExpand" Text="Employee Edition"/>
             </StackLayout>
-            <!-- <Button x:Name="Btn_Register" Text="Register (DEV version only)"  Margin="0,0,0,0"/> -->
         </StackLayout>
 
 
-        <Label x:Name="Lbl_CR" Text="Copyright © 2018, Kleyn Group"/>
+        <Label x:Name="LblCr" Text="Copyright © 2018, Kleyn Group"/>
 
     </StackLayout>
 

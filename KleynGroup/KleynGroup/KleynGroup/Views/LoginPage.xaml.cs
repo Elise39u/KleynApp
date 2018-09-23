@@ -1,23 +1,15 @@
 ﻿using KleynGroup.Models;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Runtime.Serialization;
-using System.Diagnostics;
 using KleynGroup.Data;
-using System.Timers;
+
 
 namespace KleynGroup.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class LoginPage
     {
 
         public LoginPage()
@@ -31,29 +23,29 @@ namespace KleynGroup.Views
         void Init()
         {
             BackgroundColor = Constants.KleynGroupBG;
-                       Lbl_Logingin.FontAttributes = FontAttributes.Bold;
+            LblLogingin.FontAttributes = FontAttributes.Bold;
 
             LoginLogo.HeightRequest = Constants.LoginLogoHeight;
 
             ActivitySpinner.IsVisible = false;
 
-            Entry_Username.BackgroundColor = Constants.LoginEntryBgColor;
-            Entry_Username.TextColor = Constants.LoginEntryColor;
+            EntryUsername.BackgroundColor = Constants.LoginEntryBgColor;
+            EntryUsername.TextColor = Constants.LoginEntryColor;
 
-            Entry_Password.BackgroundColor = Constants.LoginEntryBgColor;
-            Entry_Password.TextColor = Constants.LoginEntryColor;
-            Entry_Password.IsPassword = true;
-            Lbl_Logingin.FontAttributes = FontAttributes.Bold;
-            Btn_Signin.BackgroundColor = Constants.KleynGroupTXT;
-            Btn_Signin.TextColor = Constants.MainTextColor;
-
+            EntryPassword.BackgroundColor = Constants.LoginEntryBgColor;
+            EntryPassword.TextColor = Constants.LoginEntryColor;
+            EntryPassword.IsPassword = true;
+            LblLogingin.FontAttributes = FontAttributes.Bold;
+            BtnSignin.BackgroundColor = Constants.KleynGroupTXT;
+            BtnSignin.TextColor = Constants.MainTextColor;
+            LblEdition.TextColor = Constants.MainTextColor;
 
             //Btn_Register.BackgroundColor = Constants.KleynGroupTXT;
             //Btn_Register.TextColor = Constants.MainTextColor;
 
-            Lbl_CR.TextColor = Constants.MainTextColor;
-            Lbl_CR.HorizontalOptions = LayoutOptions.Center;
-            Lbl_CR.VerticalOptions = LayoutOptions.EndAndExpand;
+            LblCr.TextColor = Constants.MainTextColor;
+            LblCr.HorizontalOptions = LayoutOptions.Center;
+            LblCr.VerticalOptions = LayoutOptions.EndAndExpand;
 
 
         }
@@ -61,81 +53,100 @@ namespace KleynGroup.Views
         async void LoginRequest(object sender, EventArgs e)
         {
 
-
-            var user = new User
+            if (CheckNetwork.IsInternet())
             {
-                Username = Entry_Username.Text,
-                Password = Entry_Password.Text
-            };
-            if (CheckNetwork.IsInternet() == true)
-            {
-                if (user.Username == "" && user.Password == "")
+                var user = new User
                 {
-                    Lbl_Logingin.TextColor = Color.Red;
-                    Lbl_Logingin.Text = "Please fill in the fields before logging in!";
+                    Username = EntryUsername.Text,
+                    Password = EntryPassword.Text
+                };
+
+                if (user.Username == "" || user.Password == "")
+                {
+                    LblLogingin.TextColor = Color.Red;
+                    LblLogingin.Text = "Please fill in the fields before logging in!";
                 }
                 else
                 {
-                    Lbl_Logingin.TextColor = Color.SpringGreen;
-                    Lbl_Logingin.Text = "Logging in! please wait.....";
+                    LblLogingin.TextColor = Color.GreenYellow;
+                    LblLogingin.Text = "Logging in! please wait.....";
                     var result = await App.RestserviceLogin.Login(user);
-                    if (result.access_token != null)
+                    Console.WriteLine("Add result");
+                    var dbclear = new UserDatabaseController();
+                    dbclear.UserDatabase();
+                    Console.WriteLine("DbCLEAR AREA");
+                    dbclear.Droptable();
+                    Console.WriteLine("Passed Droptable");
+                    if (result.remember_token != null)
                     {
+                        Console.WriteLine("Token is not null");
+                        if (result.IsFrozen == 0)
+                        {
+                            Console.WriteLine("Not Frozen");
+                            var userDatabase = new UserDatabaseController();
+                            userDatabase.AddUser(result);
+                            var DashBoard = new NavigationPage(new Dashboard());
+                            NavigationPage.SetHasNavigationBar(DashBoard, false);
+                            await Navigation.PushAsync(DashBoard);
+                            LblLogingin.Text = "";
+                            EntryPassword.Text = "";
+                        }
+                        else
+                        {
+                            LblLogingin.TextColor = Color.Red;
 
-                        App.UserDatabase.SaveUser(user);
-                        App.TokenDatabase.SaveToken(result);
-                        await Navigation.PushAsync(new Dashboard());
-                        Lbl_Logingin.Text = "";
-                        Entry_Password.Text = "";
+                            LblLogingin.Text = "Your account has been deactivated. Please contact a administrator";
+                        }
+
                     }
                     else
                     {
-                        Lbl_Logingin.TextColor = Color.Red;
+                        LblLogingin.TextColor = Color.Red;
 
-                        Lbl_Logingin.Text = "Invalid login information... please try again!";
+                        LblLogingin.Text = "Invalid login information... please try again!";
 
                     }
                 }
             }
             else
             {
-                Lbl_Logingin.TextColor = Color.FromRgb(255, 0, 0);
-                Lbl_Logingin.HorizontalTextAlignment = TextAlignment.Center;
-                Lbl_Logingin.Text =
+                LblLogingin.TextColor = Color.FromRgb(255, 0, 0);
+                LblLogingin.HorizontalTextAlignment = TextAlignment.Center;
+                LblLogingin.Text =
                     "OOPS! Please connect to a network first.";
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(170, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(170, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(255, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(255, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(170, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(170, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(255, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(255, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(170, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(170, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(255, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(255, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(170, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(170, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(255, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(255, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(170, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(170, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(255, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(255, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(170, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(170, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(255, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(255, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(170, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(170, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(255, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(255, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(170, 0, 0);
+                LblLogingin.TextColor = Color.FromRgb(170, 0, 0);
                 await Task.Delay(250);
-                Lbl_Logingin.TextColor = Color.FromRgb(255, 0, 0);
-                Lbl_Logingin.Text = "";
+                LblLogingin.TextColor = Color.FromRgb(255, 0, 0);
+                LblLogingin.Text = "";
             }
         }
     }

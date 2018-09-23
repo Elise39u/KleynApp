@@ -1,29 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using System.IO;
 using KleynGroup.Data;
 using KleynGroup.Droid.Data;
 using Xamarin.Forms;
-using Environment = System.Environment;
 
-[assembly: Dependency(typeof(SQLite_Android))]
+[assembly: Dependency(typeof(SqLiteAndroid))]
 namespace KleynGroup.Droid.Data
 {
-    public class SQLite_Android :ISQLite
+    public class SqLiteAndroid : ISqLite
+
     {
-        public SQLite_Android() { }
         public SQLite.SQLiteConnection GetConnection()
         {
-            var sqliteFileName = "Login.db3";
+            var sqliteFileName = "Release.sqlite";
             string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var path = Path.Combine(documentsPath, sqliteFileName);
             var conn = new SQLite.SQLiteConnection(path);

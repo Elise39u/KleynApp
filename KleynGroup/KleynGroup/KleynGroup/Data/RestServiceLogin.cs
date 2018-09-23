@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -12,53 +11,60 @@ namespace KleynGroup.Data
 {
     public class RestServiceLogin
     {
-     HttpClient client;
+        readonly HttpClient _client;
         private string grant_type = "password";
 
         public RestServiceLogin()
         {
-            client = new HttpClient();
-            client.MaxResponseContentBufferSize = 256000;
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
+            _client = new HttpClient { MaxResponseContentBufferSize = 256000 };
+            _client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
         }
 
         public async Task<Token> Login(User user)
         {
-            var postData = new List<KeyValuePair<string, string>>();
-            postData.Add(new KeyValuePair<string, string>("grant_type", grant_type));
-            postData.Add(new KeyValuePair<string, string>("username", user.Username));
-            postData.Add(new KeyValuePair<string, string>("password", user.Password));
+            var postData = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("grant_type", grant_type),
+                new KeyValuePair<string, string>("username", user.Username),
+                new KeyValuePair<string, string>("password", user.Password)
+            };
             var content = new FormUrlEncodedContent(postData);
             var response = await PostResponseLogin<Token>(Constants.URL_LOGIN, content);
-            DateTime dt = new DateTime();
-            dt = DateTime.Today;
-            response.expire_date = dt.AddSeconds(response.expire_in);
+            var dt = DateTime.Today;
+            Console.WriteLine("Passed Time");
+            Console.WriteLine(response);
+            response.ExpireDate = dt.AddSeconds(response.ExpireIn);
+            Console.WriteLine("Passed Addning time");
             return response;
         }
 
         public async Task<T> PostResponseLogin<T>(string weburl, FormUrlEncodedContent content) where T : class
         {
-            var response = await client.PostAsync(Constants.URL_LOGIN, content);
+            Console.WriteLine("Post time");
+            var response = await _client.PostAsync(Constants.URL_LOGIN, content);
+            Console.WriteLine("Posted Client");
             var jsonResult = response.Content.ReadAsStringAsync().Result;
+            Console.WriteLine(jsonResult);
             var responseObject = JsonConvert.DeserializeObject<T>(jsonResult);
+            Console.WriteLine("Passed Tesst");
             return responseObject;
         }
 
         public async Task<T> PostResponse<T>(string weburl, string jsonstring) where T : class
         {
-            var Token = App.TokenDatabase.GetToken();
+            var token = App.TokenDatabase.GetToken();
             string contentType = "application/json";
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token.access_token);
+            _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token.remember_token);
             try
             {
-                var result = await client.PostAsync(Constants.URL_LOGIN, new StringContent(jsonstring, Encoding.UTF8, contentType));
+                var result = await _client.PostAsync(Constants.URL_LOGIN, new StringContent(jsonstring, Encoding.UTF8, contentType));
                 if (result.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var jsonresult = result.Content.ReadAsStringAsync().Result;
                     try
                     {
-                        var ContentResp = JsonConvert.DeserializeObject<T>(jsonresult);
-                        return ContentResp;
+                        var contentResp = JsonConvert.DeserializeObject<T>(jsonresult);
+                        return contentResp;
                     }
                     catch
                     {
@@ -76,19 +82,19 @@ namespace KleynGroup.Data
 
         public async Task<T> GetResponse<T>(string weburl) where T : class
         {
-            var Token = App.TokenDatabase.GetToken();
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Token.access_token);
+            var token = App.TokenDatabase.GetToken();
+            _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token.remember_token);
             try
             {
-                var response = await client.GetAsync(weburl);
+                var response = await _client.GetAsync(weburl);
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var jsonresult = response.Content.ReadAsStringAsync().Result;
                     Debug.WriteLine("JsonResult:" + jsonresult);
                     try
                     {
-                        var ContentResp = JsonConvert.DeserializeObject<T>(jsonresult);
-                        return ContentResp;
+                        var contentResp = JsonConvert.DeserializeObject<T>(jsonresult);
+                        return contentResp;
                     }
                     catch
                     {

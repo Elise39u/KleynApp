@@ -5,7 +5,7 @@ using SQLite;
 
 namespace KleynGroup.Data
 {
-    public interface ISQLite
+    public interface ISqLite
     {
         SQLiteConnection GetConnection();
     }

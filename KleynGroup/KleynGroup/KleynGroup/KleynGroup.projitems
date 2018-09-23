@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Data\RestServiceLogin.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\TokenDatabaseController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\UserDatabaseController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\YoutubeActions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -33,9 +34,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Item.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Locatieitem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PictureList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TerrainLocations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Token.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\UserData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Youtube.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\YoutubeConstans.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\YoutubeItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
@@ -104,7 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Models\Youtube API-ef0a296bc25b.json" />
-    <Content Include="$(MSBuildThisFileDirectory)Views\client_secrets.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Views\client_secret_924710780360-lpfpvg2csvit4dkumt98p9iugdh2tsl8.apps.googleusercontent.com.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\ImagesPage.xaml">

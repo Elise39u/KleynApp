@@ -7,7 +7,7 @@ using SQLite;
 namespace KleynGroup.Models
 {
     [Table("UserData")]
-    public class Token
+    public class UserData
     {
         [PrimaryKey, AutoIncrement, NotNull]
         public int Id { get; set; }
