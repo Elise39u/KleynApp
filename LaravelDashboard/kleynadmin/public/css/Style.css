@@ -1,0 +1,84 @@
+* {
+    font-family: Verdana, Arial, sans-serif;
+}
+
+.logo, .main-header .navbar, .sidebar-toggle, .navbar-custom-menu{
+    background-color: #021F6E !important;
+    color: #EF7622 !important;
+}
+.logo{
+    height: 63px !important;
+}
+.logo-img{
+    margin: 3px;
+    height: 55px;
+}
+.dropdown-toggle{
+    color: #EF7622 !important;
+}
+.dropdown-toggle .fa{
+    padding: 10px;
+}
+.sidebar-toggle{
+    height: 63px;
+    padding-top: 5px;
+}
+.sidebar-toggle:hover, .dropdown-toggle:hover,  .dropdown-toggle:focus{
+    background-color: #022c9a !important;
+}
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
+    background-color: #022c9a;
+}
+.sidebar-menu .header{
+   background-color: #1a2226;
+    color: #4b646f;
+}
+.main-sidebar{
+    background-color: #222d32;
+    padding-top: 60px;
+    height: 100%;
+}
+.main-sidebar a{
+    color: #b8c7ce;
+}
+.main-sidebar a:hover{
+    background-color: #1c252a;
+}
+.main-sidebar a:hover{
+    color: #ffffff;
+}
+.user-header{
+    background-color: #022c9a;
+}
+.aapje-img{
+     height: 20px;
+ }
+.logo-mini b{
+    color: #ffffff;
+}
+.red{
+    color: red;
+}
+
+.modal-header{
+     background-color:  #021F6E;
+     color: #ffffff;
+ }
+.modal-footer{
+    background-color:  #021F6E;
+    color: #ffffff;
+}
+
+.modal-header .close{
+    color: #EF7622;
+    opacity: 1;
+    text-shadow: none;
+}
+.btn-kleynorange{
+    background-color: #EF7622;
+    color: #ffffff;
+}
+.btn-kleynorange:hoveR{
+    color: #ffffff;
+    background-color: #df6e20;
+}
